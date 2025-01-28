@@ -5,11 +5,11 @@ public class Course
 {
     [BsonId]
     public ObjectId Id { get; set; } 
-    public string Title { get; set; }
-    public string Description { get; set; }
+    public required string Title { get; set; }
+    public required string Description { get; set; }
     public ObjectId InstructorId { get; set; } 
-    public List<ObjectId> DepartmentIds { get; set; } 
+    public required List<ObjectId> DepartmentIds { get; set; } = new();
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
-    public int Credits { get; set; }
+    public required int Credits { get; set; }
 }

@@ -8,6 +8,6 @@ public class Enrollment
     public ObjectId StudentId { get; set; } 
     public ObjectId CourseId { get; set; }
     public DateTime EnrollmentDate { get; set; }
-    public string Status { get; set; } 
-    public string Grade { get; set; }
+    public required string Status { get; set; } 
+    public required string Grade { get; set; }
 }
