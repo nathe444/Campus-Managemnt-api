@@ -46,3 +46,7 @@ C:\Users\hp\OneDrive\Desktop\folders\programmin\c#\CampusManagementSystem\obj\De
 C:\Users\hp\OneDrive\Desktop\folders\programmin\c#\CampusManagementSystem\obj\Debug\net9.0\CampusManagementSystem.pdb
 C:\Users\hp\OneDrive\Desktop\folders\programmin\c#\CampusManagementSystem\obj\Debug\net9.0\CampusManagementSystem.genruntimeconfig.cache
 C:\Users\hp\OneDrive\Desktop\folders\programmin\c#\CampusManagementSystem\obj\Debug\net9.0\ref\CampusManagementSystem.dll
+C:\Users\hp\OneDrive\Desktop\folders\programmin\c#\CampusManagementSystem\bin\Debug\net9.0\BCrypt.Net-Next.dll
+C:\Users\hp\OneDrive\Desktop\folders\programmin\c#\CampusManagementSystem\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\hp\OneDrive\Desktop\folders\programmin\c#\CampusManagementSystem\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\hp\OneDrive\Desktop\folders\programmin\c#\CampusManagementSystem\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
