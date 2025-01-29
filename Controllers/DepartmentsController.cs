@@ -187,7 +187,15 @@ public class DepartmentsController : ControllerBase
     public async Task<ActionResult<IEnumerable<Student>>> GetStudents(string id)
     {
         var students = await _departmentService.GetStudentsAsync(id);
-        return Ok(students);
+        return Ok(students.Select(s => new
+        {
+            id = s.StringId,
+            s.Name,
+            s.Email,
+            s.Age,
+            s.EnrollmentDate,
+            departmentId = s.StringDepartmentId
+        }));
     }
 
     [HttpGet("{id}/instructors")]

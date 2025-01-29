@@ -24,7 +24,15 @@ public class StudentsController : ControllerBase
         var total = await _studentService.CountAsync();
         
         return Ok(new {
-            data = students,
+            data = students.Select(s => new
+            {
+                id = s.StringId,
+                s.Name,
+                s.Email,
+                s.Age,
+                s.EnrollmentDate,
+                departmentId = s.StringDepartmentId
+            }),
             total,
             page,
             pageSize,
@@ -48,7 +56,15 @@ public class StudentsController : ControllerBase
             return Forbid();
         }
 
-        return Ok(student);
+        return Ok(new
+        {
+            id = student.StringId,
+            student.Name,
+            student.Email,
+            student.Age,
+            student.EnrollmentDate,
+            departmentId = student.StringDepartmentId
+        });
     }
 
     [HttpGet("search")]
@@ -56,7 +72,15 @@ public class StudentsController : ControllerBase
     public async Task<ActionResult<IEnumerable<Student>>> Search([FromQuery] string term)
     {
         var students = await _studentService.SearchAsync(term);
-        return Ok(students);
+        return Ok(students.Select(s => new
+        {
+            id = s.StringId,
+            s.Name,
+            s.Email,
+            s.Age,
+            s.EnrollmentDate,
+            departmentId = s.StringDepartmentId
+        }));
     }
 
     [HttpGet("department/{departmentId}")]
@@ -64,7 +88,15 @@ public class StudentsController : ControllerBase
     public async Task<ActionResult<IEnumerable<Student>>> GetByDepartment(string departmentId)
     {
         var students = await _studentService.GetByDepartmentAsync(departmentId);
-        return Ok(students);
+        return Ok(students.Select(s => new
+        {
+            id = s.StringId,
+            s.Name,
+            s.Email,
+            s.Age,
+            s.EnrollmentDate,
+            departmentId = s.StringDepartmentId
+        }));
     }
 
     [HttpGet("{id}/courses")]
@@ -85,15 +117,26 @@ public class StudentsController : ControllerBase
     [Authorize(Roles = "Admin")]
     public async Task<ActionResult<Student>> Update(string id, Student student)
     {
-        try
-        {
-            var updatedStudent = await _studentService.UpdateAsync(id, student);
-            return Ok(updatedStudent);
-        }
-        catch (Exception)
+        var existingStudent = await _studentService.GetByIdAsync(id);
+        if (existingStudent == null)
         {
             return NotFound();
         }
+
+        // Ensure Id and DepartmentId are not changed
+        student.Id = existingStudent.Id;
+        student.DepartmentId = existingStudent.DepartmentId;
+
+        var updatedStudent = await _studentService.UpdateAsync(id, student);
+        return Ok(new
+        {
+            id = updatedStudent.StringId,
+            updatedStudent.Name,
+            updatedStudent.Email,
+            updatedStudent.Age,
+            updatedStudent.EnrollmentDate,
+            departmentId = updatedStudent.StringDepartmentId
+        });
     }
 
     [HttpDelete("{id}")]

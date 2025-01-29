@@ -41,9 +41,14 @@ public class StudentService : IStudentService
     public async Task<Student> UpdateAsync(string id, Student student)
     {
         var objectId = ObjectId.Parse(id);
-        student.Id = objectId;
-        await _students.ReplaceOneAsync(s => s.Id == objectId, student);
-        return student;
+        var update = Builders<Student>.Update
+            .Set(s => s.Name, student.Name)
+            .Set(s => s.Email, student.Email)
+            .Set(s => s.Age, student.Age)
+            .Set(s => s.EnrollmentDate, student.EnrollmentDate);
+
+        await _students.UpdateOneAsync(s => s.Id == objectId, update);
+        return await GetByIdAsync(id);
     }
 
     public async Task DeleteAsync(string id)
