@@ -41,7 +41,16 @@ public class AuthController : ControllerBase
             var user = await _authService.RegisterStudentAsync(request);
             return Ok(new { 
                 message = "Registration successful. Please wait for admin approval.",
-                user = user 
+                user = new
+                {
+                    id = user.StringId,
+                    user.Email,
+                    user.Role,
+                    user.IsActive,
+                    user.CreatedAt,
+                    user.LastLogin,
+                    profileId = user.StringProfileId
+                }
             });
         }
         catch (InvalidOperationException ex)
