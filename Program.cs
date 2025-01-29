@@ -12,6 +12,7 @@ builder.Services.AddSingleton<MongoDBContext>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+builder.Services.AddScoped<IInstructorService, InstructorService>();
 
 builder.Services.AddControllers();
 
